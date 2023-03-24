@@ -31,7 +31,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference historyRef = database.getReference("history");
+        DatabaseReference historyRef = database.getReference("history2");
 
         // Get current date
         Date currentDate = Calendar.getInstance().getTime();

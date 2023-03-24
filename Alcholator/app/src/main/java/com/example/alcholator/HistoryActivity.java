@@ -36,8 +36,8 @@ public class HistoryActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String currentUserUid = mAuth.getCurrentUser().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("history");
-        Query currentUserQuery = mDatabase.orderByChild("userUID").equalTo(currentUserUid);
+        mDatabase = FirebaseDatabase.getInstance().getReference("history2");
+        Query currentUserQuery = mDatabase.orderByChild("uid").equalTo(currentUserUid);
 
         mListView = findViewById(R.id.listView);
 
