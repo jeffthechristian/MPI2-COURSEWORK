@@ -1,12 +1,17 @@
 package com.example.alcholator;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,11 +45,20 @@ public class HistoryActivity extends AppCompatActivity {
                     historyEntries.add(historyEntry);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                ArrayAdapter<String> adapter = new ArrayAdapter(
                         HistoryActivity.this,
                         android.R.layout.simple_list_item_1,
                         historyEntries
-                );
+                ) {
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
+                        TextView textView = view.findViewById(android.R.id.text1);
+                        textView.setTextColor(Color.WHITE);
+                        return view;
+                    }
+                };
                 mListView.setAdapter(adapter);
             }
 
