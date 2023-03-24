@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bacground">
 
+    <!-- Text View at the top -->
+    <TextView
+        android:id="@+id/tv_alcoholatr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/white"
+        android:text="ALCOHOLATOR"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"/>
+
+    <!-- List View in the center -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:layout_above="@+id/ll_buttons"
+        android:layout_below="@+id/tv_alcoholatr"
         android:divider="@color/black"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        android:padding="10dp" />
+
+    <!-- Layout to hold buttons at the bottom -->
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
+
+        <ImageButton
+            android:id="@+id/edit_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/profile_png" />
+
+        <ImageButton
+            android:id="@+id/show_history"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/history_png" />
+
+        <ImageButton
+            android:id="@+id/calculate"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/calc_png" />
+
+    </LinearLayout>
 
 </RelativeLayout>
