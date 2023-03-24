@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -31,7 +33,12 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String currentUserUid = mAuth.getCurrentUser().getUid();
+
         mDatabase = FirebaseDatabase.getInstance().getReference("history");
+        Query currentUserQuery = mDatabase.orderByChild("userUID").equalTo(currentUserUid);
+
         mListView = findViewById(R.id.listView);
 
         ValueEventListener valueEventListener = new ValueEventListener() {
@@ -68,6 +75,6 @@ public class HistoryActivity extends AppCompatActivity {
             }
         };
 
-        mDatabase.addValueEventListener(valueEventListener);
+        currentUserQuery.addValueEventListener(valueEventListener);
     }
 }

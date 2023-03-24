@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SigninActivity extends AppCompatActivity {
-
+    public static String uid;
     private EditText emailTextView, passwordTextView;
     private Button Btn;
     private ProgressBar progressBar;
@@ -94,6 +94,7 @@ public class SigninActivity extends AppCompatActivity {
                                     @NonNull Task<AuthResult> task)
                             {
                                 if (task.isSuccessful()) {
+                                    uid = mAuth.getCurrentUser().getUid();
                                     Toast.makeText(getApplicationContext(),
                                                     "Login successful!!",
                                                     Toast.LENGTH_LONG)

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
+    String uid = SigninActivity.uid;
     TextView bloodResult, soberResult, yesDrive, noDrive;
     ImageView pirmais, otrais, ceturtais, piektais, sestais, pedejais;
 
@@ -64,10 +66,10 @@ public class ResultActivity extends AppCompatActivity {
 
         // Create a new history entry with the date and blood result
         String bloodResultText = bloodResult.getText().toString();
-        HistoryEntry historyEntry = new HistoryEntry(dateString, bloodResultText);
+        HistoryEntry historyEntry = new HistoryEntry(uid, dateString, bloodResultText);
 
         // Save the history entry to the database
-        historyRef.push().setValue(historyEntry);
+        historyRef.child(uid).push().setValue(historyEntry);
 
         Button btnBack2 = findViewById(R.id.btnBack2);
         btnBack2.setOnClickListener(new View.OnClickListener() {
