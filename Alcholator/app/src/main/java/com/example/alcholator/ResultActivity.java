@@ -73,7 +73,7 @@ public class ResultActivity extends AppCompatActivity {
         btnBack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent doo = new Intent(ResultActivity.this, AlcoholCalculator.class);
+                Intent doo = new Intent(ResultActivity.this, HistoryActivity.class);
                 doo.putExtra("keygender", sgender);
                 doo.putExtra("keyweight", sweight);
                 startActivity(doo);
