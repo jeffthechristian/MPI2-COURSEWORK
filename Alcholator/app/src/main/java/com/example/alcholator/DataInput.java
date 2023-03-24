@@ -29,6 +29,10 @@ public class DataInput extends AppCompatActivity {
         maleBox= findViewById(R.id.maleBox);
         femaleBox= findViewById(R.id.femaleBox);
 
+        edit_profile = findViewById(R.id.edit_profile);
+        show_history = findViewById(R.id.show_history);
+        calculate = findViewById(R.id.calculate);
+
         weightInput = findViewById(R.id.weightInput);
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
@@ -59,9 +63,7 @@ public class DataInput extends AppCompatActivity {
                 String gender = genderCheck();
                 String weight = weightInput.getText().toString();
 
-                edit_profile = findViewById(R.id.edit_profile);
-                show_history = findViewById(R.id.show_history);
-                calculate = findViewById(R.id.calculate);
+
 
                 if(weight.contentEquals("")||weight.startsWith("0")){
                     Toast.makeText(DataInput.this, "Please enter correct data", Toast.LENGTH_LONG).show();
