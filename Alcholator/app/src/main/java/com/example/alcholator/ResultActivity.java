@@ -11,14 +11,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ResultActivity extends AppCompatActivity {
-    TextView bloodResult,soberResult, yesDrive, noDrive;
+    TextView bloodResult, soberResult, yesDrive, noDrive;
     ImageView pirmais, otrais, ceturtais, piektais, sestais, pedejais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference historyRef = database.getReference("history");
+
+        // Get current date
+        Date currentDate = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String dateString = dateFormat.format(currentDate);
 
         bloodResult = findViewById(R.id.bloodResult);
         soberResult = findViewById(R.id.soberResult);
@@ -40,12 +56,18 @@ public class ResultActivity extends AppCompatActivity {
         double res = Double.parseDouble(sprom);
         double res2 = Double.parseDouble(ssober);
 
-
         bloodResult.setText(sprom.substring(0,5) + " ‰");
         soberResult.setText(ssober.substring(0,ssober.indexOf(".")) + " h");
 
         canYouDrive();
         youProbablyLook();
+
+        // Create a new history entry with the date and blood result
+        String bloodResultText = bloodResult.getText().toString();
+        HistoryEntry historyEntry = new HistoryEntry(dateString, bloodResultText);
+
+        // Save the history entry to the database
+        historyRef.push().setValue(historyEntry);
 
         Button btnBack2 = findViewById(R.id.btnBack2);
         btnBack2.setOnClickListener(new View.OnClickListener() {
@@ -55,9 +77,8 @@ public class ResultActivity extends AppCompatActivity {
                 doo.putExtra("keygender", sgender);
                 doo.putExtra("keyweight", sweight);
                 startActivity(doo);
-
             }
-        } );
+        });
     }
 
     void canYouDrive() {
