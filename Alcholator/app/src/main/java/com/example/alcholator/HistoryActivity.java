@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +30,8 @@ public class HistoryActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ListView mListView;
 
+    ImageButton edit_profile, show_history, calculate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,10 @@ public class HistoryActivity extends AppCompatActivity {
         Query currentUserQuery = mDatabase.orderByChild("uid").equalTo(currentUserUid);
 
         mListView = findViewById(R.id.listView);
+
+        edit_profile = findViewById(R.id.edit_profile);
+        show_history = findViewById(R.id.show_history);
+        calculate = findViewById(R.id.calculate);
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -76,5 +84,24 @@ public class HistoryActivity extends AppCompatActivity {
         };
 
         currentUserQuery.addValueEventListener(valueEventListener);
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, DataInput.class));
+            }
+        } );
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, HistoryActivity.class));
+            }
+        } );
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, AlcoholCalculator.class));
+            }
+        } );
     }
 }

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class ResultActivity extends AppCompatActivity {
     String uid = SigninActivity.uid;
     TextView bloodResult, soberResult, yesDrive, noDrive;
     ImageView pirmais, otrais, ceturtais, piektais, sestais, pedejais;
+    ImageButton edit_profile, show_history, calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,11 @@ public class ResultActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference historyRef = database.getReference("history2");
+
+
+        edit_profile = findViewById(R.id.edit_profile);
+        show_history = findViewById(R.id.show_history);
+        calculate = findViewById(R.id.calculate);
 
         // Get current date
         Date currentDate = Calendar.getInstance().getTime();
@@ -144,5 +151,24 @@ public class ResultActivity extends AppCompatActivity {
             sestais.setVisibility(View.INVISIBLE);
             pedejais.setVisibility(View.VISIBLE);
         }
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ResultActivity.this, DataInput.class));
+            }
+        } );
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ResultActivity.this, HistoryActivity.class));
+            }
+        } );
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ResultActivity.this, AlcoholCalculator.class));
+            }
+        } );
     }
 }

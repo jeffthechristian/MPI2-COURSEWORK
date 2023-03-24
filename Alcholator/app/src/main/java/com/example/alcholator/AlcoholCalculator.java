@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AlcoholCalculator extends AppCompatActivity {
     TextView alcStrengthInput, volumeInput;
     Button btnSaveData2, btnBack;
+    ImageButton edit_profile, show_history, calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,10 @@ public class AlcoholCalculator extends AppCompatActivity {
 
         btnSaveData2= findViewById(R.id.btnSaveData2);
         btnBack= findViewById(R.id.btnBack);
+        edit_profile = findViewById(R.id.edit_profile);
+        show_history = findViewById(R.id.show_history);
+        calculate = findViewById(R.id.calculate);
+
 
         btnSaveData2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +117,25 @@ public class AlcoholCalculator extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AlcoholCalculator.this, DataInput.class));
+            }
+        } );
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AlcoholCalculator.this, DataInput.class));
+            }
+        } );
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AlcoholCalculator.this, HistoryActivity.class));
+            }
+        } );
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AlcoholCalculator.this, AlcoholCalculator.class));
             }
         } );
     }
