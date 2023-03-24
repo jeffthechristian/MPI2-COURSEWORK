@@ -101,55 +101,32 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     void youProbablyLook() {
-        double promiles = Double.parseDouble(getIntent().getStringExtra("keyprom"));
+        double bloodAlcoholLevel = Double.parseDouble(getIntent().getStringExtra("keyprom"));
+        View[] views = {pirmais, otrais, ceturtais, piektais, sestais, pedejais};
 
-        if (promiles < 1) {
-            pirmais.setVisibility(View.VISIBLE);
-            otrais.setVisibility(View.INVISIBLE);
-            ceturtais.setVisibility(View.INVISIBLE);
-            piektais.setVisibility(View.INVISIBLE);
-            sestais.setVisibility(View.INVISIBLE);
-            pedejais.setVisibility(View.INVISIBLE);
+        for (int i = 0; i < views.length; i++) {
+            views[i].setVisibility(View.INVISIBLE);
         }
-        if (promiles < 2 && promiles >=1) {
-            pirmais.setVisibility(View.INVISIBLE);
-            otrais.setVisibility(View.VISIBLE);
-            ceturtais.setVisibility(View.INVISIBLE);
-            piektais.setVisibility(View.INVISIBLE);
-            sestais.setVisibility(View.INVISIBLE);
-            pedejais.setVisibility(View.INVISIBLE);
-        }
-        if (promiles < 3 && promiles >= 2) {
-            pirmais.setVisibility(View.INVISIBLE);
-            otrais.setVisibility(View.INVISIBLE);
-            ceturtais.setVisibility(View.VISIBLE);
-            piektais.setVisibility(View.INVISIBLE);
-            sestais.setVisibility(View.INVISIBLE);
-            pedejais.setVisibility(View.INVISIBLE);
-        }
-        if (promiles < 4 && promiles >=3) {
-            pirmais.setVisibility(View.INVISIBLE);
-            otrais.setVisibility(View.INVISIBLE);
-            ceturtais.setVisibility(View.INVISIBLE);
-            piektais.setVisibility(View.VISIBLE);
-            sestais.setVisibility(View.INVISIBLE);
-            pedejais.setVisibility(View.INVISIBLE);
-        }
-        if (promiles < 5 && promiles >= 4) {
-            pirmais.setVisibility(View.INVISIBLE);
-            otrais.setVisibility(View.INVISIBLE);
-            ceturtais.setVisibility(View.INVISIBLE);
-            piektais.setVisibility(View.INVISIBLE);
-            sestais.setVisibility(View.VISIBLE);
-            pedejais.setVisibility(View.INVISIBLE);
-        }
-        if (promiles > 5) {
-            pirmais.setVisibility(View.INVISIBLE);
-            otrais.setVisibility(View.INVISIBLE);
-            ceturtais.setVisibility(View.INVISIBLE);
-            piektais.setVisibility(View.INVISIBLE);
-            sestais.setVisibility(View.INVISIBLE);
-            pedejais.setVisibility(View.VISIBLE);
+
+        switch ((int) Math.floor(bloodAlcoholLevel)) {
+            case 0:
+                views[0].setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                views[1].setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                views[2].setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                views[3].setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                views[4].setVisibility(View.VISIBLE);
+                break;
+            default:
+                views[5].setVisibility(View.VISIBLE);
+                break;
         }
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
