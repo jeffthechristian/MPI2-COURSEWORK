@@ -57,7 +57,7 @@ public class DataInput extends AppCompatActivity {
                 String weight = weightInput.getText().toString();
 
                 if(weight.contentEquals("")||weight.startsWith("0")){
-                    Toast.makeText(DataInput.this, "Please enter necessary data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DataInput.this, "Please enter correct data", Toast.LENGTH_LONG).show();
                 }
 
                 else {
