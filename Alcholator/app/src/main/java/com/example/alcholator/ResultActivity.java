@@ -63,8 +63,8 @@ public class ResultActivity extends AppCompatActivity {
         double res = Double.parseDouble(sprom);
         double res2 = Double.parseDouble(ssober);
 
-        bloodResult.setText(sprom.substring(0,5) + " ‰");
-        soberResult.setText(ssober.substring(0,ssober.indexOf(".")) + " h");
+        bloodResult.setText(sprom.substring(0, 5) + " ‰");
+        soberResult.setText(ssober.substring(0, ssober.indexOf(".")) + " h");
 
         canYouDrive();
         youProbablyLook();
@@ -122,18 +122,18 @@ public class ResultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(ResultActivity.this, ProfileActivity.class));
             }
-        } );
+        });
         show_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ResultActivity.this, HistoryActivity.class));
             }
-        } );
+        });
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ResultActivity.this, AlcoholCalculator.class));
             }
-        } );
+        });
     }
 }

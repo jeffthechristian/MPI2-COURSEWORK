@@ -20,6 +20,6 @@ public class CheckboxScreen extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(CheckboxScreen.this, StartActivity.class));
             }
-        } );
+        });
     }
 }

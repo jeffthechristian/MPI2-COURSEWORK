@@ -34,8 +34,8 @@ public class DataInput extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_input);
 
-        maleBox= findViewById(R.id.maleBox);
-        femaleBox= findViewById(R.id.femaleBox);
+        maleBox = findViewById(R.id.maleBox);
+        femaleBox = findViewById(R.id.femaleBox);
 
         show_history = findViewById(R.id.show_history);
         calculate = findViewById(R.id.calculate);
@@ -47,7 +47,7 @@ public class DataInput extends AppCompatActivity {
         maleBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(((CheckBox)v).isChecked()) {
+                if (((CheckBox) v).isChecked()) {
                     femaleBox.setChecked(false);
                 }
             }
@@ -56,7 +56,7 @@ public class DataInput extends AppCompatActivity {
         femaleBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(((CheckBox)v).isChecked()) {
+                if (((CheckBox) v).isChecked()) {
                     maleBox.setChecked(false);
                 }
             }
@@ -111,7 +111,7 @@ public class DataInput extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +119,7 @@ public class DataInput extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +127,7 @@ public class DataInput extends AppCompatActivity {
                 Intent intent = new Intent(DataInput.this, ProfileActivity.class);
                 startActivity(intent);
             }
-        } );
+        });
     }
 
     public String genderCheck() {
@@ -136,12 +136,12 @@ public class DataInput extends AppCompatActivity {
         String noGender = "0.68";
         String gender;
 
-        if(maleBox.isChecked()){
-            gender=male;
-        }else if(femaleBox.isChecked()){
-            gender=female;
-        }else{
-            gender=noGender;
+        if (maleBox.isChecked()) {
+            gender = male;
+        } else if (femaleBox.isChecked()) {
+            gender = female;
+        } else {
+            gender = noGender;
         }
         return gender;
     }

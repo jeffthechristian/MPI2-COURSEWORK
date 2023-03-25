@@ -72,7 +72,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
 
                 // Set up the adapter for the ListView
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, android.R.layout.simple_list_item_2, android.R.id.text1, listData ) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, android.R.layout.simple_list_item_2, android.R.id.text1, listData) {
                     @NonNull
                     @Override
                     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -102,7 +102,7 @@ public class HistoryActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +111,6 @@ public class HistoryActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
     }
 }

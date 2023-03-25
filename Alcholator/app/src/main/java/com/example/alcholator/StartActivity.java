@@ -23,10 +23,10 @@ public class StartActivity extends AppCompatActivity {
         btnDataInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
                 String sgender = pref.getString("keygender", null);
                 String sweight = pref.getString("keyweight", "0.68");
-                if(sgender == null){
+                if (sgender == null) {
                     if (soulCheck.isChecked()) {
                         Intent intent = new Intent(StartActivity.this, DataInput.class);
                         startActivity(intent);
@@ -35,8 +35,7 @@ public class StartActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
 
-                }
-                else{
+                } else {
                     if (soulCheck.isChecked()) {
                         Intent intent = new Intent(StartActivity.this, AlcoholCalculator.class);
                         intent.putExtra("keygender", sgender);

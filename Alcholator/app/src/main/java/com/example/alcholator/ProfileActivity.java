@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
                 startActivity(intent);
             }
-        } );
+        });
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        } );
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -33,6 +33,7 @@ public class SigninActivity extends AppCompatActivity {
     public CheckBox rememberMe;
 
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +58,9 @@ public class SigninActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             // Automatically log in the user using saved login credentials
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener < AuthResult > () {
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task < AuthResult > task) {
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // User logged in successfully
                                 uid = mAuth.getCurrentUser().getUid();
@@ -144,10 +145,10 @@ public class SigninActivity extends AppCompatActivity {
         // signin existing user
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
-                        new OnCompleteListener < AuthResult > () {
+                        new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(
-                                    @NonNull Task < AuthResult > task) {
+                                    @NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
 
                                     uid = mAuth.getCurrentUser().getUid();

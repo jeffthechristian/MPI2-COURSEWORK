@@ -30,8 +30,7 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
@@ -47,8 +46,7 @@ public class SignupActivity extends AppCompatActivity {
         // Set on Click Listener on Registration button
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 registerNewUser();
             }
         });
@@ -68,8 +66,7 @@ public class SignupActivity extends AppCompatActivity {
         signupTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private void registerNewUser()
-    {
+    private void registerNewUser() {
 
         // show the visibility of progress bar to show loading
         progressBar.setVisibility(View.VISIBLE);
@@ -101,8 +98,7 @@ public class SignupActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(),
                                             "Registration successful!",
@@ -117,8 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                                     = new Intent(SignupActivity.this,
                                     StartActivity.class);
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
 
                             // Registration failed
                             Toast.makeText(
