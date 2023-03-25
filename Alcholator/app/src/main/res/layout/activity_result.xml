@@ -11,31 +11,28 @@
         android:id="@+id/BloodAlcohol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="ALCOHOL IN BLOOD:"
         android:textColor="@color/white"
         android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bloodResult"
-        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintBottom_toTopOf="@+id/hourText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.274"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
-        android:gravity="center"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bloodResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+
         android:text="result"
         android:textColor="@color/white"
         android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.859"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
-        android:gravity="center"/>
+        app:layout_constraintBottom_toTopOf="@+id/soberResult"
+        app:layout_constraintStart_toStartOf="@+id/soberResult"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/hourText"
@@ -45,10 +42,9 @@
         android:textColor="@color/white"
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/soberResult"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <TextView
         android:id="@+id/soberResult"
@@ -59,8 +55,7 @@
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.859"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hourText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.118" />
 
@@ -70,12 +65,13 @@
         android:layout_height="wrap_content"
         android:text="Here's a random joke:"
         android:textColor="@color/white"
-        android:textSize="50px"
+        android:textSize="60px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.259" />
 
     <TextView
         android:id="@+id/jok1"
@@ -84,11 +80,11 @@
         android:layout_marginTop="12dp"
         android:textColor="@color/white"
         android:textSize="50px"
-        app:layout_constraintBottom_toTopOf="@+id/candrivetext5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/candrivetext" />
+        app:layout_constraintTop_toBottomOf="@+id/candrivetext"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/jok2"
@@ -101,7 +97,8 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.357"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/youLook"
@@ -126,11 +123,9 @@
         android:textSize="50px"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/soberResult"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.184" />
 
     <TextView
         android:id="@+id/textView17"
@@ -141,9 +136,7 @@
         android:textSize="50px"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.825"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/soberResult"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.186" />
 
@@ -277,10 +270,8 @@
         android:textColor="@color/white"
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView16"
-        app:layout_constraintHorizontal_bias="0.319"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.184" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
