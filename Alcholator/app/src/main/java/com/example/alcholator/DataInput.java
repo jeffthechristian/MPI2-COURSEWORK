@@ -1,6 +1,7 @@
 
 package com.example.alcholator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,11 +18,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class DataInput extends AppCompatActivity {
     public CheckBox maleBox, femaleBox;
     public TextView weightInput;
 
-    ImageButton edit_profile, show_history, calculate;
+    ImageButton show_history, calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,52 +68,47 @@ public class DataInput extends AppCompatActivity {
         btnSaveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String gender = genderCheck();
                 String weight = weightInput.getText().toString();
 
-
-
-                if(weight.contentEquals("")||weight.startsWith("0")){
+                if (TextUtils.isEmpty(weight) || weight.startsWith("0")) {
                     Toast.makeText(DataInput.this, "Please enter correct data", Toast.LENGTH_LONG).show();
-                }
+                } else {
+                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("userData");
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                else {
+                    // Check if user has existing data
+                    dataRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                // User has existing data, update it
+                                DataEntry dataEntry = new DataEntry(uid, weight, gender);
+                                dataRef.child(uid).setValue(dataEntry);
+                                Toast.makeText(DataInput.this, "Data updated.", Toast.LENGTH_LONG).show();
+                            } else {
+                                // User does not have existing data, create new node
+                                DataEntry dataEntry = new DataEntry(uid, weight, gender);
+                                dataRef.child(uid).setValue(dataEntry);
+                                Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
-                    SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("keygender", gender);
-                    editor.putString("keyweight", weight);
-                    editor.apply();
-
-                    Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e("DataInput", "Error retrieving data: " + error.getMessage());
+                            Toast.makeText(DataInput.this, "Error retrieving data.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
-        } );
+        });
 
-        //Go to alc. calculator activity without data input
-        Button btnSkipData = findViewById(R.id.btnSkipData);
-        btnSkipData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String gender = genderCheck();
-                String weight = "75";
-
-                Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
-                intent.putExtra("keygender", gender);
-                intent.putExtra("keyweight", weight);
-                startActivity(intent);
-            }
-        } );
         show_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
-                String gender = pref.getString("keygender", null);
-                String weight = pref.getString("keyweight", "0.68");
                 Intent intent = new Intent(DataInput.this, HistoryActivity.class);
-                intent.putExtra("keygender", gender);
-                intent.putExtra("keyweight", weight);
+
                 startActivity(intent);
 
             }
@@ -111,12 +116,7 @@ public class DataInput extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
-                String gender = pref.getString("keygender", null);
-                String weight = pref.getString("keyweight", "0.68");
                 Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
-                intent.putExtra("keygender", gender);
-                intent.putExtra("keyweight", weight);
                 startActivity(intent);
 
             }
@@ -138,8 +138,5 @@ public class DataInput extends AppCompatActivity {
         }
         return gender;
     }
-
-
-
 }
 
