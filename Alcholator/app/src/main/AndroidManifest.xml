@@ -58,14 +58,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CheckboxScreen"
-            android:exported="false"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".AlcoholCalculator"
             android:exported="false"
             android:screenOrientation="portrait">
@@ -75,14 +67,6 @@
         </activity>
         <activity
             android:name=".DataInput"
-            android:exported="false"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".StartActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data

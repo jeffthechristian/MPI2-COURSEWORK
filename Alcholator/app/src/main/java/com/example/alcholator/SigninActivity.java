@@ -69,7 +69,7 @@ public class SigninActivity extends AppCompatActivity {
                                                 Toast.LENGTH_LONG)
                                         .show();
                                 // if sign-in is successful
-                                Intent intent = new Intent(SigninActivity.this, StartActivity.class);
+                                Intent intent = new Intent(SigninActivity.this, AlcoholCalculator.class);
                                 startActivity(intent);
                                 finish(); // close the SigninActivity
                             } else {
@@ -164,7 +164,7 @@ public class SigninActivity extends AppCompatActivity {
                                     // intent to home activity
                                     Intent intent
                                             = new Intent(SigninActivity.this,
-                                            StartActivity.class);
+                                            AlcoholCalculator.class);
                                     startActivity(intent);
                                 } else {
 
