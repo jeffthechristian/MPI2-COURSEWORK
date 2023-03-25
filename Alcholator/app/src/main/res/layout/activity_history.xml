@@ -26,8 +26,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_buttons"
         android:layout_below="@+id/tv_alcoholatr"
-        android:divider="@color/black"
-        android:dividerHeight="1dp"
+        android:dividerHeight="2dp"
         android:padding="10dp"
         android:textColor="@android:color/white"/>
 
