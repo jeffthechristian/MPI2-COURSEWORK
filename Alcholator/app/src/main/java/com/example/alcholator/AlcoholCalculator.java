@@ -8,10 +8,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class AlcoholCalculator extends AppCompatActivity {
     TextView alcStrengthInput, volumeInput;
@@ -22,6 +28,22 @@ public class AlcoholCalculator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alcohol_calculator);
+
+        List<alcoholObj> objects = new ArrayList<>();
+        objects.add(new alcoholObj("beer", 4.5,0.5));
+        objects.add(new alcoholObj("wine", 12,0.75));
+
+        ArrayList<String> spinnerValues = new ArrayList<>();
+        for (alcoholObj object : objects) {
+            spinnerValues.add(object.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = findViewById(R.id.spin);
+        spinner.setAdapter(adapter);
+
+
 
         alcStrengthInput = findViewById(R.id.alcStrengthInput);
         alcStrengthInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
