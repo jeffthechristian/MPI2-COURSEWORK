@@ -77,6 +77,9 @@ public class AlcoholCalculator extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
+
+
+
         alcStrengthInput = findViewById(R.id.alcStrengthInput);
         alcStrengthInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeInput= findViewById(R.id.volumeInput);
