@@ -76,11 +76,7 @@ public class DataInput extends AppCompatActivity {
                     editor.putString("keyweight", weight);
                     editor.apply();
 
-                    Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
-                    intent.putExtra("keygender", gender);
-                    intent.putExtra("keyweight", weight);
-
-                    startActivity(intent);
+                    Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
                 }
             }
         } );
@@ -102,13 +98,27 @@ public class DataInput extends AppCompatActivity {
         show_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DataInput.this, HistoryActivity.class));
+                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(DataInput.this, HistoryActivity.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DataInput.this, AlcoholCalculator.class));
+                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
     }

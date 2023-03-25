@@ -1,6 +1,8 @@
 package com.example.alcholator;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -96,14 +98,28 @@ public class HistoryActivity extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HistoryActivity.this, DataInput.class));
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(HistoryActivity.this, DataInput.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HistoryActivity.this, AlcoholCalculator.class));
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(HistoryActivity.this, AlcoholCalculator.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
     }

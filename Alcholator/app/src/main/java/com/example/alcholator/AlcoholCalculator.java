@@ -39,7 +39,7 @@ public class AlcoholCalculator extends AppCompatActivity {
 
                 SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
                 String sgender = pref.getString("keygender", null);
-                String sweight = pref.getString("keyweight", "0.68");
+                String sweight = pref.getString("keyweight", "75");
 
 
 
@@ -121,13 +121,27 @@ public class AlcoholCalculator extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AlcoholCalculator.this, DataInput.class));
+                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(AlcoholCalculator.this, DataInput.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
         show_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AlcoholCalculator.this, HistoryActivity.class));
+                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(AlcoholCalculator.this, HistoryActivity.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+                startActivity(intent);
+
             }
         } );
     }
