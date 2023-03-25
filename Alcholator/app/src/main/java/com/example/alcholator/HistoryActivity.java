@@ -30,11 +30,17 @@ public class HistoryActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseUser currentUser;
     private ListView listView;
+    ImageButton edit_profile, show_history, calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+
+        edit_profile = findViewById(R.id.edit_profile);
+        show_history = findViewById(R.id.show_history);
+        calculate = findViewById(R.id.calculate);
 
         // Get the current user
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,5 +80,23 @@ public class HistoryActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, DataInput.class));
+            }
+        } );
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, HistoryActivity.class));
+            }
+        } );
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HistoryActivity.this, AlcoholCalculator.class));
+            }
+        } );
     }
 }
