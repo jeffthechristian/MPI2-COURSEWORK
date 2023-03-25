@@ -1,14 +1,18 @@
 package com.example.alcholator;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,18 +43,39 @@ public class AlcoholCalculator extends AppCompatActivity {
         setContentView(R.layout.activity_alcohol_calculator);
 
         List<alcoholObj> objects = new ArrayList<>();
-        objects.add(new alcoholObj("beer", 4.5,0.5));
-        objects.add(new alcoholObj("wine", 12,0.75));
+        objects.add(new alcoholObj("Select a drink",0,0));
+        objects.add(new alcoholObj("Light Beer", 4,0.5));
+        objects.add(new alcoholObj("Cider", 4.5,0.5));
+        objects.add(new alcoholObj("Beer", 5.2,0.5));
+        objects.add(new alcoholObj("Champagne", 11,0.75));
+        objects.add(new alcoholObj("Wine", 12,0.75));
+        objects.add(new alcoholObj("Liquor", 20,0.5));
+        objects.add(new alcoholObj("Jagermeister", 35,0.5));
+        objects.add(new alcoholObj("Tequila", 38,0.5));
+        objects.add(new alcoholObj("Vodka", 40,0.5));
+        objects.add(new alcoholObj("Rum", 50,0.5));
+        objects.add(new alcoholObj("Spirit", 90,0.1));
 
         ArrayList<String> spinnerValues = new ArrayList<>();
         for (alcoholObj object : objects) {
             spinnerValues.add(object.getName());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerValues);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1, spinnerValues){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text1 = view.findViewById(android.R.id.text1);
+                text1.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spin);
         spinner.setAdapter(adapter);
+
 
         alcStrengthInput = findViewById(R.id.alcStrengthInput);
         alcStrengthInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -64,6 +89,21 @@ public class AlcoholCalculator extends AppCompatActivity {
         // Retrieve gender and weight values from Firebase Realtime Database
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("userData");
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                alcStrengthInput.setText(objects.get(position).getVolalc().toString());
+                volumeInput.setText(objects.get(position).getVol().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                alcStrengthInput.setText("0");
+                volumeInput.setText("0");
+            }
+        });
 
         dataRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

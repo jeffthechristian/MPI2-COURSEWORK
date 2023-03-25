@@ -98,12 +98,8 @@ public class HistoryActivity extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
-                String gender = pref.getString("keygender", null);
-                String weight = pref.getString("keyweight", "0.68");
+
                 Intent intent = new Intent(HistoryActivity.this, DataInput.class);
-                intent.putExtra("keygender", gender);
-                intent.putExtra("keyweight", weight);
                 startActivity(intent);
 
             }
@@ -112,12 +108,7 @@ public class HistoryActivity extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
-                String gender = pref.getString("keygender", null);
-                String weight = pref.getString("keyweight", "0.68");
                 Intent intent = new Intent(HistoryActivity.this, AlcoholCalculator.class);
-                intent.putExtra("keygender", gender);
-                intent.putExtra("keyweight", weight);
                 startActivity(intent);
 
             }
