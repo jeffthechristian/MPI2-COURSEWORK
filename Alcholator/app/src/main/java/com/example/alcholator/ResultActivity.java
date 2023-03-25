@@ -59,8 +59,6 @@ public class ResultActivity extends AppCompatActivity {
 
         String sprom = getIntent().getStringExtra("keyprom");
         String ssober = getIntent().getStringExtra("keysober");
-        String sgender = getIntent().getStringExtra("keygender");
-        String sweight = getIntent().getStringExtra("keyweight");
 
         double res = Double.parseDouble(sprom);
         double res2 = Double.parseDouble(ssober);
@@ -78,16 +76,6 @@ public class ResultActivity extends AppCompatActivity {
         // Save the history entry to the database
         historyRef.child(uid).push().setValue(historyEntry);
 
-        Button btnBack2 = findViewById(R.id.btnBack2);
-        btnBack2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent doo = new Intent(ResultActivity.this, HistoryActivity.class);
-                doo.putExtra("keygender", sgender);
-                doo.putExtra("keyweight", sweight);
-                startActivity(doo);
-            }
-        });
     }
 
     void canYouDrive() {
