@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,14 +52,19 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSkipData22 = findViewById(R.id.signup);
-        btnSkipData22.setOnClickListener(new View.OnClickListener() {
+        TextView signupTextView = findViewById(R.id.signup_textview);
+        String text = "Not a member? Sign up now!";
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
+        ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SigninActivity.this, SignupActivity.class);
-                startActivity(intent); // add this line
+                startActivity(intent);
             }
-        });
+        };
+        spannableStringBuilder.setSpan(clickableSpan, text.indexOf("Sign up now!"), text.indexOf("Sign up now!") + "Sign up now!".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        signupTextView.setText(spannableStringBuilder);
+        signupTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void loginUserAccount()
