@@ -28,7 +28,8 @@
         android:layout_below="@+id/tv_alcoholatr"
         android:divider="@color/black"
         android:dividerHeight="1dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="@android:color/white"/>
 
     <!-- Layout to hold buttons at the bottom -->
     <LinearLayout
