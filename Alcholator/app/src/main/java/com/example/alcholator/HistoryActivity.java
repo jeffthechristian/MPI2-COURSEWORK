@@ -1,19 +1,16 @@
 package com.example.alcholator;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +18,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -56,6 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Create a new list to hold the data
                 ArrayList<String> listData = new ArrayList<>();
+                ArrayList<String> listData1 = new ArrayList<>();
 
                 // Loop through the data and add it to the list if it belongs to the current user
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -64,14 +61,29 @@ public class HistoryActivity extends AppCompatActivity {
                         for (DataSnapshot child : data.getChildren()) {
                             String bloodResult = child.child("bloodResult").getValue(String.class);
                             String date = child.child("date").getValue(String.class);
-                            String dataString = "Blood result: " + bloodResult + ", Date: " + date;
+                            String dataString = "Blood result: " + bloodResult;
                             listData.add(dataString);
+                            listData1.add(date);
                         }
                     }
                 }
 
                 // Set up the adapter for the ListView
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(HistoryActivity.this, android.R.layout.simple_list_item_1, listData);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, android.R.layout.simple_list_item_2, android.R.id.text1, listData ) {
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
+                        TextView text1 = view.findViewById(android.R.id.text1);
+                        TextView text2 = view.findViewById(android.R.id.text2);
+
+                        text1.setTextColor(Color.WHITE);
+                        text2.setTextColor(Color.GRAY);
+                        text2.setText(listData1.get(position));
+
+                        return view;
+                    }
+                };
                 listView.setAdapter(adapter);
             }
 
