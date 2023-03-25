@@ -8,7 +8,7 @@
     tools:context=".DataInput">
 
     <Button
-        android:id="@+id/btnSaveData"
+        android:id="@+id/editData"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@drawable/button_style"

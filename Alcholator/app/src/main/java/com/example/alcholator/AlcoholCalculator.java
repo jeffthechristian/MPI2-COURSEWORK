@@ -165,7 +165,7 @@ public class AlcoholCalculator extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AlcoholCalculator.this, DataInput.class);
+                Intent intent = new Intent(AlcoholCalculator.this, ProfileActivity.class);
                 startActivity(intent);
 
             }

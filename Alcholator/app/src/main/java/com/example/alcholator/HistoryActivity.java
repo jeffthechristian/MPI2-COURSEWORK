@@ -98,8 +98,17 @@ public class HistoryActivity extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
 
                 Intent intent = new Intent(HistoryActivity.this, DataInput.class);
+=======
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                String gender = pref.getString("keygender", null);
+                String weight = pref.getString("keyweight", "0.68");
+                Intent intent = new Intent(HistoryActivity.this, ProfileActivity.class);
+                intent.putExtra("keygender", gender);
+                intent.putExtra("keyweight", weight);
+>>>>>>> Stashed changes
                 startActivity(intent);
 
             }

@@ -120,7 +120,7 @@ public class ResultActivity extends AppCompatActivity {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ResultActivity.this, DataInput.class));
+                startActivity(new Intent(ResultActivity.this, ProfileActivity.class));
             }
         } );
         show_history.setOnClickListener(new View.OnClickListener() {

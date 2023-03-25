@@ -4,9 +4,7 @@ package com.example.alcholator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -29,7 +27,7 @@ public class DataInput extends AppCompatActivity {
     public CheckBox maleBox, femaleBox;
     public TextView weightInput;
 
-    ImageButton show_history, calculate;
+    ImageButton show_history, calculate, edit_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class DataInput extends AppCompatActivity {
 
         show_history = findViewById(R.id.show_history);
         calculate = findViewById(R.id.calculate);
+        edit_profile = findViewById(R.id.edit_profile);
 
         weightInput = findViewById(R.id.weightInput);
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -64,7 +63,7 @@ public class DataInput extends AppCompatActivity {
         });
 
         //Go to alc. calculator activity with data input
-        Button btnSaveData = findViewById(R.id.btnSaveData);
+        Button btnSaveData = findViewById(R.id.editData);
         btnSaveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +118,14 @@ public class DataInput extends AppCompatActivity {
                 Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
                 startActivity(intent);
 
+            }
+        } );
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DataInput.this, ProfileActivity.class);
+                startActivity(intent);
             }
         } );
     }
