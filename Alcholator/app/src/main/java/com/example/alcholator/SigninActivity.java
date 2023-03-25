@@ -3,7 +3,9 @@ package com.example.alcholator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -12,6 +14,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,13 +30,16 @@ public class SigninActivity extends AppCompatActivity {
     private EditText emailTextView, passwordTextView;
     private Button Btn;
     private ProgressBar progressBar;
+    public CheckBox rememberMe;
 
     private FirebaseAuth mAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+
+        rememberMe = findViewById(R.id.rememberme);
+
         // taking instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
@@ -43,11 +49,42 @@ public class SigninActivity extends AppCompatActivity {
         Btn = findViewById(R.id.login);
         progressBar = findViewById(R.id.progressBar);
 
-        // Set on Click Listener on Sign-in button
+        // On subsequent app launches, check if saved login credentials exist in local storage
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "");
+        String password = sharedPreferences.getString("password", "");
+
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            // Automatically log in the user using saved login credentials
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener < AuthResult > () {
+                        @Override
+                        public void onComplete(@NonNull Task < AuthResult > task) {
+                            if (task.isSuccessful()) {
+                                // User logged in successfully
+                                uid = mAuth.getCurrentUser().getUid();
+                                Toast.makeText(getApplicationContext(),
+                                                "Login successful!!",
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                                // if sign-in is successful
+                                Intent intent = new Intent(SigninActivity.this, StartActivity.class);
+                                startActivity(intent);
+                                finish(); // close the SigninActivity
+                            } else {
+                                // User login failed
+                                Toast.makeText(getApplicationContext(),
+                                                "Login failed!!",
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        }
+                    });
+
+        } // Set on Click Listener on Sign-in button
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 loginUserAccount();
             }
         });
@@ -67,8 +104,7 @@ public class SigninActivity extends AppCompatActivity {
         signupTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private void loginUserAccount()
-    {
+    private void loginUserAccount() {
 
         // show the visibility of progress bar to show loading
         progressBar.setVisibility(View.VISIBLE);
@@ -95,15 +131,25 @@ public class SigninActivity extends AppCompatActivity {
             return;
         }
 
+        // Check if the "remember me" checkbox is checked
+        if (rememberMe.isChecked()) {
+            // Save the user's login credentials securely in local storage
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("email", email);
+            editor.putString("password", password);
+            editor.apply();
+        }
+
         // signin existing user
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
-                        new OnCompleteListener<AuthResult>() {
+                        new OnCompleteListener < AuthResult > () {
                             @Override
                             public void onComplete(
-                                    @NonNull Task<AuthResult> task)
-                            {
+                                    @NonNull Task < AuthResult > task) {
                                 if (task.isSuccessful()) {
+
                                     uid = mAuth.getCurrentUser().getUid();
                                     Toast.makeText(getApplicationContext(),
                                                     "Login successful!!",
@@ -119,9 +165,7 @@ public class SigninActivity extends AppCompatActivity {
                                             = new Intent(SigninActivity.this,
                                             StartActivity.class);
                                     startActivity(intent);
-                                }
-
-                                else {
+                                } else {
 
                                     // sign-in failed
                                     Toast.makeText(getApplicationContext(),
@@ -135,4 +179,5 @@ public class SigninActivity extends AppCompatActivity {
                             }
                         });
     }
+
 }

@@ -70,7 +70,7 @@
             android:textColor="@color/white" />
 
         <CheckBox
-            android:id="@+id/soulCheck"
+            android:id="@+id/rememberme"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_below="@+id/password"
@@ -83,7 +83,7 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/soulCheck"
+            android:layout_below="@+id/rememberme"
             android:layout_marginTop="9dp"
             android:background="@drawable/button_style"
             android:text="Login"
