@@ -37,7 +37,6 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         edit_profile = findViewById(R.id.edit_profile);
-        show_history = findViewById(R.id.show_history);
         calculate = findViewById(R.id.calculate);
 
         // Get the current user
@@ -100,12 +99,7 @@ public class HistoryActivity extends AppCompatActivity {
                 startActivity(new Intent(HistoryActivity.this, DataInput.class));
             }
         } );
-        show_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HistoryActivity.this, HistoryActivity.class));
-            }
-        } );
+
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

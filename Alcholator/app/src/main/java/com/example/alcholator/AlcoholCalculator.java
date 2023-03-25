@@ -32,8 +32,6 @@ public class AlcoholCalculator extends AppCompatActivity {
         btnBack= findViewById(R.id.btnBack);
         edit_profile = findViewById(R.id.edit_profile);
         show_history = findViewById(R.id.show_history);
-        calculate = findViewById(R.id.calculate);
-
 
         btnSaveData2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +128,6 @@ public class AlcoholCalculator extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AlcoholCalculator.this, HistoryActivity.class));
-            }
-        } );
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AlcoholCalculator.this, AlcoholCalculator.class));
             }
         } );
     }
