@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HistoryActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
@@ -70,6 +71,10 @@ public class HistoryActivity extends AppCompatActivity {
                         }
                     }
                 }
+
+                // Reverse the order of the lists
+                Collections.reverse(listData);
+                Collections.reverse(listData1);
 
                 // Set up the adapter for the ListView
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, android.R.layout.simple_list_item_2, android.R.id.text1, listData) {
