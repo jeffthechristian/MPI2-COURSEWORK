@@ -51,7 +51,7 @@ public class AlcoholCalculator extends AppCompatActivity {
         objects.add(new alcoholObj("Champagne", 11,0.75));
         objects.add(new alcoholObj("Wine", 12,0.75));
         objects.add(new alcoholObj("Liquor", 20,0.5));
-        objects.add(new alcoholObj("Jagermeister", 35,0.5));
+        objects.add(new alcoholObj("Jägermeister", 35,0.5));
         objects.add(new alcoholObj("Tequila", 38,0.5));
         objects.add(new alcoholObj("Vodka", 40,0.5));
         objects.add(new alcoholObj("Rum", 50,0.5));
