@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -133,6 +134,21 @@ public class AlcoholCalculator extends AppCompatActivity {
         btnSaveData2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(sweight)) {
+                    Toast.makeText(getApplicationContext(),
+                                    "Please input your weight and gender!",
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(sgender)) {
+                    Toast.makeText(getApplicationContext(),
+                                    "Please input your weight and gender!",
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
 
                 SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
 
