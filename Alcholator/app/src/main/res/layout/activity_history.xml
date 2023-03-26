@@ -53,10 +53,10 @@
             android:id="@+id/show_history"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:background="@android:color/white"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/history_png" />
+            app:srcCompat="@drawable/history_png_red" />
 
         <ImageButton
             android:id="@+id/calculate"

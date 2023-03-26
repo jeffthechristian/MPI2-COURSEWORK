@@ -68,7 +68,7 @@
         android:id="@+id/profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@android:color/white"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977"
-        app:srcCompat="@drawable/profile_png" />
+        app:srcCompat="@drawable/profile_png_red" />
 
     <ImageButton
         android:id="@+id/show_history"
