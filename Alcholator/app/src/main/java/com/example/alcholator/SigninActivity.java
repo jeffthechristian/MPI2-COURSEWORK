@@ -119,7 +119,7 @@ public class SigninActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(),
                             "Please enter email!!",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_SHORT)
                     .show();
             return;
         }
@@ -127,7 +127,15 @@ public class SigninActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(),
                             "Please enter password!!",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplicationContext(),
+                            "Invalid email or password!",
+                            Toast.LENGTH_SHORT)
                     .show();
             return;
         }
