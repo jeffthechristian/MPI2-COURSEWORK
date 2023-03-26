@@ -126,7 +126,7 @@ public class SignupActivity extends AppCompatActivity {
                             // if the user created intent to login activity
                             Intent intent
                                     = new Intent(SignupActivity.this,
-                                    AlcoholCalculator.class);
+                                    DataInput.class);
                             startActivity(intent);
                         } else {
 
