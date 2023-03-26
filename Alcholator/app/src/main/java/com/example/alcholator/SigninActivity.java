@@ -65,8 +65,8 @@ public class SigninActivity extends AppCompatActivity {
                                 // User logged in successfully
                                 uid = mAuth.getCurrentUser().getUid();
                                 Toast.makeText(getApplicationContext(),
-                                                "Login successful!!",
-                                                Toast.LENGTH_LONG)
+                                                "Login successful!",
+                                                Toast.LENGTH_SHORT)
                                         .show();
                                 // if sign-in is successful
                                 Intent intent = new Intent(SigninActivity.this, AlcoholCalculator.class);
@@ -161,8 +161,8 @@ public class SigninActivity extends AppCompatActivity {
 
                                     uid = mAuth.getCurrentUser().getUid();
                                     Toast.makeText(getApplicationContext(),
-                                                    "Login successful!!",
-                                                    Toast.LENGTH_LONG)
+                                                    "Login successful!",
+                                                    Toast.LENGTH_SHORT)
                                             .show();
 
                                     // hide the progress bar
@@ -178,8 +178,8 @@ public class SigninActivity extends AppCompatActivity {
 
                                     // sign-in failed
                                     Toast.makeText(getApplicationContext(),
-                                                    "Login failed!!",
-                                                    Toast.LENGTH_LONG)
+                                                    "Login failed!",
+                                                    Toast.LENGTH_SHORT)
                                             .show();
 
                                     // hide the progress bar
