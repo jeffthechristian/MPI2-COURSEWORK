@@ -76,11 +76,7 @@ public class AlcoholCalculator extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spin);
         spinner.setAdapter(adapter);
-
-
-
-
-
+        
         alcStrengthInput = findViewById(R.id.alcStrengthInput);
         alcStrengthInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeInput= findViewById(R.id.volumeInput);
@@ -117,11 +113,7 @@ public class AlcoholCalculator extends AppCompatActivity {
                     if (dataEntry != null) {
                         sgender = dataEntry.getGender();
                         sweight = dataEntry.getWeight();
-
-                        // Do something with gender and weight values here
                     }
-                } else {
-                    // User has no data in the database
                 }
             }
 
@@ -135,18 +127,12 @@ public class AlcoholCalculator extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(sweight)) {
-                    Toast.makeText(getApplicationContext(),
-                                    "Please input your weight and gender!",
-                                    Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(sgender)) {
-                    Toast.makeText(getApplicationContext(),
-                                    "Please input your weight and gender!",
-                                    Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -157,7 +143,6 @@ public class AlcoholCalculator extends AppCompatActivity {
                     try {
                         double alcStrength = Double.parseDouble(alcStrengthInput.getText().toString());
                         double volume = Double.parseDouble(volumeInput.getText().toString());
-
 
                         if (alcStrength<=0||volume<=0){
                             throw new Exception();

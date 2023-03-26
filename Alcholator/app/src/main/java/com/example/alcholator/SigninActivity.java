@@ -1,8 +1,6 @@
 package com.example.alcholator;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,16 +17,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class SigninActivity extends AppCompatActivity {
     public static String uid;
     private EditText emailTextView, passwordTextView;
-    private Button Btn;
     private ProgressBar progressBar;
     public CheckBox rememberMe;
 
@@ -47,7 +42,7 @@ public class SigninActivity extends AppCompatActivity {
         // initialising all views through id defined above
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.password);
-        Btn = findViewById(R.id.login);
+        Button btn = findViewById(R.id.login);
         progressBar = findViewById(R.id.progressBar);
 
         // On subsequent app launches, check if saved login credentials exist in local storage
@@ -57,38 +52,23 @@ public class SigninActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             // Automatically log in the user using saved login credentials
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // User logged in successfully
-                                uid = mAuth.getCurrentUser().getUid();
-                                Toast.makeText(getApplicationContext(),
-                                                "Login successful!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                                // if sign-in is successful
-                                Intent intent = new Intent(SigninActivity.this, AlcoholCalculator.class);
-                                startActivity(intent);
-                                finish(); // close the SigninActivity
-                            } else {
-                                // User login failed
-                                Toast.makeText(getApplicationContext(),
-                                                "Login failed!!",
-                                                Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        }
-                    });
-
-        } // Set on Click Listener on Sign-in button
-        Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUserAccount();
-            }
-        });
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    // User logged in successfully
+                    uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+                    // if sign-in is successful
+                    Intent intent = new Intent(SigninActivity.this, AlcoholCalculator.class);
+                    startActivity(intent);
+                    finish(); // close the SigninActivity
+                } else {
+                    // User login failed
+                    Toast.makeText(getApplicationContext(), "Login failed!!", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        // Set on Click Listener on Sign-in button
+        btn.setOnClickListener(v -> loginUserAccount());
 
         TextView signupTextView = findViewById(R.id.signup_textview);
         String text = "Not a member? Sign up now!";
@@ -151,42 +131,26 @@ public class SigninActivity extends AppCompatActivity {
         }
 
         // signin existing user
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(
-                        new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(
-                                    @NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
 
-                                    uid = mAuth.getCurrentUser().getUid();
-                                    Toast.makeText(getApplicationContext(),
-                                                    "Login successful!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
+                // hide the progress bar
+                progressBar.setVisibility(View.GONE);
 
-                                    // hide the progress bar
-                                    progressBar.setVisibility(View.GONE);
+                // if sign-in is successful
+                // intent to home activity
+                Intent intent = new Intent(SigninActivity.this, AlcoholCalculator.class);
+                startActivity(intent);
+            } else {
 
-                                    // if sign-in is successful
-                                    // intent to home activity
-                                    Intent intent
-                                            = new Intent(SigninActivity.this,
-                                            AlcoholCalculator.class);
-                                    startActivity(intent);
-                                } else {
+                // sign-in failed
+                Toast.makeText(getApplicationContext(), "Login failed!", Toast.LENGTH_SHORT).show();
 
-                                    // sign-in failed
-                                    Toast.makeText(getApplicationContext(),
-                                                    "Login failed!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-
-                                    // hide the progress bar
-                                    progressBar.setVisibility(View.GONE);
-                                }
-                            }
-                        });
+                // hide the progress bar
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
-
 }

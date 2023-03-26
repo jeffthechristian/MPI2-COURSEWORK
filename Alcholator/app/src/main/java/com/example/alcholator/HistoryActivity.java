@@ -28,16 +28,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class HistoryActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
     private FirebaseUser currentUser;
     private ListView listView;
-    ImageButton edit_profile, show_history, calculate;
+    ImageButton edit_profile, calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
 
         edit_profile = findViewById(R.id.edit_profile);
         calculate = findViewById(R.id.calculate);
@@ -46,7 +44,7 @@ public class HistoryActivity extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Get a reference to the Firebase Realtime Database
-        mDatabase = FirebaseDatabase.getInstance().getReference("history2");
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("history2");
 
         listView = findViewById(R.id.listView);
 
@@ -105,7 +103,6 @@ public class HistoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HistoryActivity.this, ProfileActivity.class);
                 startActivity(intent);
-
             }
         });
 
@@ -114,7 +111,6 @@ public class HistoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HistoryActivity.this, AlcoholCalculator.class);
                 startActivity(intent);
-
             }
         });
     }

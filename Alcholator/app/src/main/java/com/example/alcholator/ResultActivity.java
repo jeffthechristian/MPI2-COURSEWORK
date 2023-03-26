@@ -1,26 +1,21 @@
 package com.example.alcholator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -36,6 +31,7 @@ public class ResultActivity extends AppCompatActivity {
     ImageView pirmais, otrais, ceturtais, piektais, sestais, pedejais;
     ImageButton edit_profile, show_history, calculate;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,26 +45,23 @@ public class ResultActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String responseData = response.body().string();
                     try {
                         JSONObject jsonObject = new JSONObject(responseData);
                         String name = jsonObject.getString("setup");
                         String email = jsonObject.getString("punchline");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView nameTextView = findViewById(R.id.jok1);
-                                TextView emailTextView = findViewById(R.id.jok2);
-                                nameTextView.setText(name);
-                                emailTextView.setText(email);
-                            }
+                        runOnUiThread(() -> {
+                            TextView nameTextView = findViewById(R.id.jok1);
+                            TextView emailTextView = findViewById(R.id.jok2);
+                            nameTextView.setText(name);
+                            emailTextView.setText(email);
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -88,7 +81,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // Get current date
         Date currentDate = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String dateString = dateFormat.format(currentDate);
 
         bloodResult = findViewById(R.id.bloodResult);
@@ -105,9 +98,6 @@ public class ResultActivity extends AppCompatActivity {
 
         String sprom = getIntent().getStringExtra("keyprom");
         String ssober = getIntent().getStringExtra("keysober");
-
-        double res = Double.parseDouble(sprom);
-        double res2 = Double.parseDouble(ssober);
 
         bloodResult.setText(sprom.substring(0, 5) + " ‰");
         soberResult.setText(ssober.substring(0, ssober.indexOf(".")) + " h");
@@ -138,8 +128,8 @@ public class ResultActivity extends AppCompatActivity {
         double bloodAlcoholLevel = Double.parseDouble(getIntent().getStringExtra("keyprom"));
         View[] views = {pirmais, otrais, ceturtais, piektais, sestais, pedejais};
 
-        for (int i = 0; i < views.length; i++) {
-            views[i].setVisibility(View.INVISIBLE);
+        for (View value : views) {
+            value.setVisibility(View.INVISIBLE);
         }
 
         switch ((int) Math.floor(bloodAlcoholLevel)) {
@@ -163,23 +153,8 @@ public class ResultActivity extends AppCompatActivity {
                 break;
         }
 
-        edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ResultActivity.this, ProfileActivity.class));
-            }
-        });
-        show_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ResultActivity.this, HistoryActivity.class));
-            }
-        });
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ResultActivity.this, AlcoholCalculator.class));
-            }
-        });
+        edit_profile.setOnClickListener(view -> startActivity(new Intent(ResultActivity.this, ProfileActivity.class)));
+        show_history.setOnClickListener(view -> startActivity(new Intent(ResultActivity.this, HistoryActivity.class)));
+        calculate.setOnClickListener(view -> startActivity(new Intent(ResultActivity.this, AlcoholCalculator.class)));
     }
 }
