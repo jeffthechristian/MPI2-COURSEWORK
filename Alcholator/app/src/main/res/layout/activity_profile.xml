@@ -69,6 +69,7 @@
         android:layout_width="328dp"
         android:layout_height="38dp"
         android:text="Welcome, Name!"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="80px"
         app:layout_constraintBottom_toBottomOf="parent"

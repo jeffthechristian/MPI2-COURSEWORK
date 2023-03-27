@@ -2,30 +2,45 @@ package com.example.alcholator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class ProfileActivity extends AppCompatActivity {
     ImageButton show_history, calculate;
     Button editProfile, friendList, logout;
+    TextView welcomeText;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        assert currentUser != null;
+        String email = currentUser.getEmail();
+        assert email != null;
+        String username = email.substring(0, email.indexOf("@"));
 
         show_history = findViewById(R.id.show_history);
         calculate = findViewById(R.id.calculate);
         editProfile = findViewById(R.id.editData);
         friendList = findViewById(R.id.friendlist);
         logout = findViewById(R.id.logout);
+        welcomeText = findViewById(R.id.welcomeName);
+        welcomeText.setText("Welcome, " + username + "!");
 
         show_history.setOnClickListener(view -> {
             Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
