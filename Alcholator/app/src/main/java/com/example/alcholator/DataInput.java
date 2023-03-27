@@ -76,11 +76,17 @@ public class DataInput extends AppCompatActivity {
                             DataEntry dataEntry = new DataEntry(uid, weight, gender);
                             dataRef.child(uid).setValue(dataEntry);
                             Toast.makeText(DataInput.this, "Data updated.", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(DataInput.this, ProfileActivity.class);
+                            startActivity(intent);
                         } else {
                             // User does not have existing data, create new node
                             DataEntry dataEntry = new DataEntry(uid, weight, gender);
                             dataRef.child(uid).setValue(dataEntry);
                             Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(DataInput.this, ProfileActivity.class);
+                            startActivity(intent);
                         }
                     }
 

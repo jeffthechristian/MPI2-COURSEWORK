@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText emailTextView, passwordTextView;
+    private EditText emailTextView, passwordTextView, confirmPasswordTextView;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         passwordTextView = findViewById(R.id.passwd);
         Button btn = findViewById(R.id.btnregister);
         progressBar = findViewById(R.id.progressbar);
+        confirmPasswordTextView = findViewById(R.id.passwd2);
 
         // Set on Click Listener on Registration button
         btn.setOnClickListener(v -> registerNewUser());
@@ -61,9 +62,15 @@ public class SignupActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         // Take the value of two edit texts in Strings
-        String email, password;
+        String email, password, confirmPassword;
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
+        confirmPassword = confirmPasswordTextView.getText().toString();
+
+        if (password != confirmPassword) {
+            Toast.makeText(getApplicationContext(), "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Validations for input email and password
         if (TextUtils.isEmpty(email)) {
