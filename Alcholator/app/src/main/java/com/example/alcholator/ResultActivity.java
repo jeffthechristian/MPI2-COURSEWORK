@@ -67,7 +67,7 @@ public class ResultActivity extends AppCompatActivity {
             pendingIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             long hoursUntilSober = Math.round(sober);
-            long timeInMillis = System.currentTimeMillis() + 1 * 10 * 1000;//hoursUntilSober
+            long timeInMillis = System.currentTimeMillis() + hoursUntilSober * 10 * 1000;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
             } else {
