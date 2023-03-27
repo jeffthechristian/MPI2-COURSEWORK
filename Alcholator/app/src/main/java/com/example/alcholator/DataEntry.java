@@ -1,13 +1,9 @@
 package com.example.alcholator;
 
 public class DataEntry {
-    private String uid;
-    private String weight;
-    private String gender;
-
-    public DataEntry() {
-
-    }
+    private final String uid;
+    private final String weight;
+    private final String gender;
 
     public DataEntry(String uid, String weight, String gender) {
         this.uid = uid;
@@ -15,27 +11,10 @@ public class DataEntry {
         this.gender = gender;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
     public String getWeight() {
         return weight;
     }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
     public String getGender() {
         return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 }

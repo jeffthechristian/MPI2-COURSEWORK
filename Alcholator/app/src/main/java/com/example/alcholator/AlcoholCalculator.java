@@ -3,10 +3,8 @@ package com.example.alcholator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,17 +18,15 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AlcoholCalculator extends AppCompatActivity {
     TextView alcStrengthInput, volumeInput;
@@ -76,7 +72,7 @@ public class AlcoholCalculator extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spin);
         spinner.setAdapter(adapter);
-        
+
         alcStrengthInput = findViewById(R.id.alcStrengthInput);
         alcStrengthInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeInput= findViewById(R.id.volumeInput);
@@ -88,9 +84,10 @@ public class AlcoholCalculator extends AppCompatActivity {
 
         // Retrieve gender and weight values from Firebase Realtime Database
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("userData");
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -123,63 +120,52 @@ public class AlcoholCalculator extends AppCompatActivity {
             }
         });
 
-        btnSaveData2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(sweight)) {
-                    Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        btnSaveData2.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(sweight)) {
+                Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                if (TextUtils.isEmpty(sgender)) {
-                    Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            if (TextUtils.isEmpty(sgender)) {
+                Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                SharedPreferences pref = getSharedPreferences("data",Context.MODE_PRIVATE);
+                double gender = Double.parseDouble(sgender);
+                double weight = Double.parseDouble(sweight);
+                try {
+                    double alcStrength = Double.parseDouble(alcStrengthInput.getText().toString());
+                    double volume = Double.parseDouble(volumeInput.getText().toString());
 
-                    double gender = Double.parseDouble(sgender);
-                    double weight = Double.parseDouble(sweight);
-                    try {
-                        double alcStrength = Double.parseDouble(alcStrengthInput.getText().toString());
-                        double volume = Double.parseDouble(volumeInput.getText().toString());
-
-                        if (alcStrength<=0||volume<=0){
-                            throw new Exception();
-                        }
-                        double vr = alcStrength * (volume * 7.9);
-                        double mr = weight * gender;
-                        double prom = vr / mr;
-                        double sober = prom / 0.16;
-
-                        String ssober = String.valueOf(sober);
-                        String sprom = String.valueOf(prom);
-
-                        Intent yoo = new Intent(AlcoholCalculator.this, ResultActivity.class);
-                        yoo.putExtra("keyprom", sprom);
-                        yoo.putExtra("keysober", ssober);
-
-                        startActivity(yoo);
-                    } catch (Exception e) {
-                        Toast.makeText(AlcoholCalculator.this, "Please enter correct data", Toast.LENGTH_LONG).show();
+                    if (alcStrength<=0||volume<=0){
+                        throw new Exception();
                     }
+                    double vr = alcStrength * (volume * 7.9);
+                    double mr = weight * gender;
+                    double prom = vr / mr;
+                    double sober = prom / 0.16;
+
+                    String ssober = String.valueOf(sober);
+                    String sprom = String.valueOf(prom);
+
+                    Intent yoo = new Intent(AlcoholCalculator.this, ResultActivity.class);
+                    yoo.putExtra("keyprom", sprom);
+                    yoo.putExtra("keysober", ssober);
+
+                    startActivity(yoo);
+                } catch (Exception e) {
+                    Toast.makeText(AlcoholCalculator.this, "Please enter correct data", Toast.LENGTH_LONG).show();
                 }
-        } );
+            });
 
-        edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AlcoholCalculator.this, ProfileActivity.class);
-                startActivity(intent);
+        edit_profile.setOnClickListener(view -> {
+            Intent intent = new Intent(AlcoholCalculator.this, ProfileActivity.class);
+            startActivity(intent);
 
-            }
-        } );
-        show_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AlcoholCalculator.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        } );
+        });
+        show_history.setOnClickListener(view -> {
+            Intent intent = new Intent(AlcoholCalculator.this, HistoryActivity.class);
+            startActivity(intent);
+        });
     }
 }

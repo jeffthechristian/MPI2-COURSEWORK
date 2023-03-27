@@ -9,19 +9,19 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class DataInput extends AppCompatActivity {
     public CheckBox maleBox, femaleBox;
@@ -44,89 +44,71 @@ public class DataInput extends AppCompatActivity {
         weightInput = findViewById(R.id.weightInput);
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        maleBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    femaleBox.setChecked(false);
-                }
+        maleBox.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked()) {
+                femaleBox.setChecked(false);
             }
         });
 
-        femaleBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    maleBox.setChecked(false);
-                }
+        femaleBox.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked()) {
+                maleBox.setChecked(false);
             }
         });
 
         //Go to alc. calculator activity with data input
         Button btnSaveData = findViewById(R.id.editData);
-        btnSaveData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String gender = genderCheck();
-                String weight = weightInput.getText().toString();
+        btnSaveData.setOnClickListener(view -> {
+            String gender = genderCheck();
+            String weight = weightInput.getText().toString();
 
-                if (TextUtils.isEmpty(weight) || weight.startsWith("0")) {
-                    Toast.makeText(DataInput.this, "Please enter correct data", Toast.LENGTH_LONG).show();
-                } else {
-                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("userData");
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            if (TextUtils.isEmpty(weight) || weight.startsWith("0")) {
+                Toast.makeText(DataInput.this, "Please enter correct data", Toast.LENGTH_LONG).show();
+            } else {
+                DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("userData");
+                String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-                    // Check if user has existing data
-                    dataRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                // User has existing data, update it
-                                DataEntry dataEntry = new DataEntry(uid, weight, gender);
-                                dataRef.child(uid).setValue(dataEntry);
-                                Toast.makeText(DataInput.this, "Data updated.", Toast.LENGTH_LONG).show();
-                            } else {
-                                // User does not have existing data, create new node
-                                DataEntry dataEntry = new DataEntry(uid, weight, gender);
-                                dataRef.child(uid).setValue(dataEntry);
-                                Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
-                            }
+                // Check if user has existing data
+                dataRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            // User has existing data, update it
+                            DataEntry dataEntry = new DataEntry(uid, weight, gender);
+                            dataRef.child(uid).setValue(dataEntry);
+                            Toast.makeText(DataInput.this, "Data updated.", Toast.LENGTH_LONG).show();
+                        } else {
+                            // User does not have existing data, create new node
+                            DataEntry dataEntry = new DataEntry(uid, weight, gender);
+                            dataRef.child(uid).setValue(dataEntry);
+                            Toast.makeText(DataInput.this, "Data saved.", Toast.LENGTH_LONG).show();
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("DataInput", "Error retrieving data: " + error.getMessage());
-                            Toast.makeText(DataInput.this, "Error retrieving data.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("DataInput", "Error retrieving data: " + error.getMessage());
+                        Toast.makeText(DataInput.this, "Error retrieving data.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
-        show_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DataInput.this, HistoryActivity.class);
+        show_history.setOnClickListener(view -> {
+            Intent intent = new Intent(DataInput.this, HistoryActivity.class);
 
-                startActivity(intent);
+            startActivity(intent);
 
-            }
         });
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
-                startActivity(intent);
+        calculate.setOnClickListener(view -> {
+            Intent intent = new Intent(DataInput.this, AlcoholCalculator.class);
+            startActivity(intent);
 
-            }
         });
 
-        edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DataInput.this, ProfileActivity.class);
-                startActivity(intent);
-            }
+        edit_profile.setOnClickListener(view -> {
+            Intent intent = new Intent(DataInput.this, ProfileActivity.class);
+            startActivity(intent);
         });
     }
 

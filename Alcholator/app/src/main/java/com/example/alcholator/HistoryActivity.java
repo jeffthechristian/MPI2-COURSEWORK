@@ -1,8 +1,6 @@
 package com.example.alcholator;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -59,6 +54,7 @@ public class HistoryActivity extends AppCompatActivity {
                 // Loop through the data and add it to the list if it belongs to the current user
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String uid = data.getKey();
+                    assert uid != null;
                     if (uid.equals(currentUser.getUid())) {
                         for (DataSnapshot child : data.getChildren()) {
                             String bloodResult = child.child("bloodResult").getValue(String.class);
@@ -98,20 +94,14 @@ public class HistoryActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
-        edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HistoryActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
+        edit_profile.setOnClickListener(view -> {
+            Intent intent = new Intent(HistoryActivity.this, ProfileActivity.class);
+            startActivity(intent);
         });
 
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HistoryActivity.this, AlcoholCalculator.class);
-                startActivity(intent);
-            }
+        calculate.setOnClickListener(view -> {
+            Intent intent = new Intent(HistoryActivity.this, AlcoholCalculator.class);
+            startActivity(intent);
         });
     }
 }
