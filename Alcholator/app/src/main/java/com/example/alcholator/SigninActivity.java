@@ -26,7 +26,6 @@ public class SigninActivity extends AppCompatActivity {
     private EditText emailTextView, passwordTextView;
     private ProgressBar progressBar;
     public CheckBox rememberMe;
-    public static String emailName;
     private FirebaseAuth mAuth;
 
     @Override
