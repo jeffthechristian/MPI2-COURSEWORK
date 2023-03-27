@@ -14,37 +14,42 @@
         android:gravity="center"
         android:text="ALCOHOL IN BLOOD:"
         android:textColor="@color/white"
-        android:textSize="50px"
+        android:textSize="54px"
         app:layout_constraintBottom_toTopOf="@+id/hourText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/bloodResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginStart="4dp"
 
+        android:gravity="center"
         android:text="result"
         android:textColor="@color/white"
-        android:textSize="50px"
+        android:textSize="54px"
         app:layout_constraintBottom_toTopOf="@+id/soberResult"
         app:layout_constraintStart_toStartOf="@+id/soberResult"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/hourText"
+        android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOURS UNTIL SOBER:"
+        android:layout_marginStart="8dp"
+        android:text="YES"
         android:textColor="@color/white"
-        android:textSize="50px"
+        android:textSize="54px"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
+        app:layout_constraintStart_toStartOf="@+id/soberResult"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.109" />
 
     <TextView
         android:id="@+id/soberResult"
@@ -52,26 +57,65 @@
         android:layout_height="wrap_content"
         android:text="result"
         android:textColor="@color/white"
-        android:textSize="50px"
+        android:textSize="54px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toEndOf="@+id/hourText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118" />
+        app:layout_constraintVertical_bias="0.066" />
+
+    <TextView
+        android:id="@+id/hourText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOURS UNTIL SOBER:"
+        android:textColor="@color/white"
+        android:textSize="54px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <TextView
+        android:id="@+id/candrivetext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CAN YOU DRIVE?"
+        android:textColor="@color/white"
+        android:textSize="54px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="NO"
+        android:textColor="@color/white"
+        android:textSize="54px"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/soberResult"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
 
     <TextView
         android:id="@+id/candrivetext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Here's a random joke:"
+        android:text="HERE'S A RANDOM JOKE:"
         android:textColor="@color/white"
-        android:textSize="60px"
+        android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnNotification"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/jok2"
@@ -79,10 +123,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="#C4C4C4"
         android:textSize="50px"
+        android:textStyle="italic"
+        android:alpha="0.8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/jok1" />
 
@@ -90,40 +136,16 @@
         android:id="@+id/jok1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="#C4C4C4"
         android:textSize="50px"
+        android:textStyle="italic"
+        android:alpha="0.8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/candrivetext" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YES"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/soberResult"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NO"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/soberResult"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
 
     <TextView
         android:id="@+id/youLook"
@@ -136,33 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.519" />
-
-    <ImageView
-        android:id="@+id/otrais"
-        android:layout_width="212dp"
-        android:layout_height="318dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
-        app:srcCompat="@drawable/otrais" />
-
-    <ImageView
-        android:id="@+id/ceturtais"
-        android:layout_width="212dp"
-        android:layout_height="318dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
-        app:srcCompat="@drawable/ceturtais" />
+        app:layout_constraintVertical_bias="0.461" />
 
     <ImageView
         android:id="@+id/piektais"
@@ -171,37 +167,24 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
+        app:layout_constraintVertical_bias="0.835"
         app:srcCompat="@drawable/piektais" />
 
     <ImageView
-        android:id="@+id/sestais"
+        android:id="@+id/ceturtais"
         android:layout_width="212dp"
         android:layout_height="318dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
-        app:srcCompat="@drawable/sestais" />
-
-    <ImageView
-        android:id="@+id/pedejais"
-        android:layout_width="212dp"
-        android:layout_height="318dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
-        app:srcCompat="@drawable/pedejais" />
+        app:layout_constraintVertical_bias="0.835"
+        app:srcCompat="@drawable/ceturtais" />
 
     <ImageView
         android:id="@+id/pirmais"
@@ -210,11 +193,50 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873"
+        app:layout_constraintVertical_bias="0.832"
         app:srcCompat="@drawable/pirmais" />
+
+    <ImageView
+        android:id="@+id/otrais"
+        android:layout_width="212dp"
+        android:layout_height="318dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.835"
+        app:srcCompat="@drawable/otrais" />
+
+    <ImageView
+        android:id="@+id/pedejais"
+        android:layout_width="212dp"
+        android:layout_height="318dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.835"
+        app:srcCompat="@drawable/pedejais" />
+
+    <ImageView
+        android:id="@+id/sestais"
+        android:layout_width="212dp"
+        android:layout_height="318dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.835"
+        app:srcCompat="@drawable/sestais" />
 
     <ImageButton
         android:id="@+id/edit_profile"
@@ -261,28 +283,18 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/calc_png" />
 
-    <TextView
-        android:id="@+id/candrivetext3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CAN YOU DRIVE?"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/BloodAlcohol"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
-
     <Button
         android:id="@+id/btnNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="217dp"
+        android:layout_height="34dp"
+        android:background="@drawable/button_style"
         android:text="NOTIFY"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.176" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
