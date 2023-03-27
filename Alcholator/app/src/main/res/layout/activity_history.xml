@@ -56,7 +56,7 @@
             android:background="@android:color/transparent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/history_png_red" />
+            app:srcCompat="@drawable/history_png_inv" />
 
         <ImageButton
             android:id="@+id/calculate"

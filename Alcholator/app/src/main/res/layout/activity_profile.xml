@@ -119,7 +119,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977"
-        app:srcCompat="@drawable/profile_png_red" />
+        app:srcCompat="@drawable/profile_png_inv" />
 
     <ImageButton
         android:id="@+id/show_history"
