@@ -26,7 +26,7 @@ public class SigninActivity extends AppCompatActivity {
     private EditText emailTextView, passwordTextView;
     private ProgressBar progressBar;
     public CheckBox rememberMe;
-
+    public static String emailName;
     private FirebaseAuth mAuth;
 
     @Override
@@ -54,6 +54,7 @@ public class SigninActivity extends AppCompatActivity {
             // Automatically log in the user using saved login credentials
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
+
                     // User logged in successfully
                     uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                     Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();

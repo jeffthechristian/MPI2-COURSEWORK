@@ -1,9 +1,13 @@
 package com.example.alcholator;
 
 public class DataEntry {
-    private final String uid;
-    private final String weight;
-    private final String gender;
+    private String uid;
+    private String weight;
+    private String gender;
+
+    public DataEntry() {
+        // Required default constructor for Firebase Realtime Database
+    }
 
     public DataEntry(String uid, String weight, String gender) {
         this.uid = uid;

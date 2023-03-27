@@ -16,7 +16,6 @@ public class ProfileActivity extends AppCompatActivity {
     ImageButton show_history, calculate;
     Button editProfile, friendList, logout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

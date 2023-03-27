@@ -26,7 +26,6 @@ import java.util.Objects;
 public class DataInput extends AppCompatActivity {
     public CheckBox maleBox, femaleBox;
     public TextView weightInput;
-
     ImageButton show_history, calculate, edit_profile;
 
     @Override
