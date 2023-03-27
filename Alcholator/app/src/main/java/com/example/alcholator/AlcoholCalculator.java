@@ -122,12 +122,12 @@ public class AlcoholCalculator extends AppCompatActivity {
 
         btnSaveData2.setOnClickListener(view -> {
             if (TextUtils.isEmpty(sweight)) {
-                Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please input your weight and gender! Profile -> Edit data", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (TextUtils.isEmpty(sgender)) {
-                Toast.makeText(getApplicationContext(), "Please input your weight and gender!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please input your weight and gender! Profile -> Edit data", Toast.LENGTH_SHORT).show();
                 return;
             }
 
