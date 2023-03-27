@@ -33,6 +33,7 @@ public class AlcoholCalculator extends AppCompatActivity {
     Button btnSaveData2;
     ImageButton edit_profile, show_history;
     String sgender, sweight;
+    public static double sober;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +144,7 @@ public class AlcoholCalculator extends AppCompatActivity {
                     double vr = alcStrength * (volume * 7.9);
                     double mr = weight * gender;
                     double prom = vr / mr;
-                    double sober = prom / 0.16;
+                    sober = prom / 0.16;
 
                     String ssober = String.valueOf(sober);
                     String sprom = String.valueOf(prom);

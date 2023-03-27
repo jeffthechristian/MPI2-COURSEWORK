@@ -4,12 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
@@ -30,12 +38,43 @@ public class ResultActivity extends AppCompatActivity {
     TextView bloodResult, soberResult, yesDrive, noDrive;
     ImageView pirmais, otrais, ceturtais, piektais, sestais, pedejais;
     ImageButton edit_profile, show_history, calculate;
+    Button notification;
+    Double sober = AlcoholCalculator.sober;
+    public static PendingIntent pendingIntent;
+    private static final int NOTIFICATION_ID = 1;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        notification = findViewById(R.id.btnNotification);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.app_name);
+            String description = "";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("my_notification_channel", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notification.setOnClickListener(view -> {
+            Toast.makeText(ResultActivity.this, "Sure, we will notify you when you are sober!", Toast.LENGTH_LONG).show();
+            Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+            broadcastIntent.putExtra("notification_id", NOTIFICATION_ID);
+            pendingIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            long hoursUntilSober = Math.round(sober);
+            long timeInMillis = System.currentTimeMillis() + 1 * 10 * 1000;//hoursUntilSober
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+            }
+        });
+
 
         OkHttpClient client = new OkHttpClient();
 
