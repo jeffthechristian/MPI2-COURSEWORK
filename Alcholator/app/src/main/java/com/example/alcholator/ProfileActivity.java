@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
                         String weightString = dataSnapshot.child("weight").getValue(String.class);
                         assert weightString != null;
                         double weight = Double.parseDouble(weightString);
-                        if (gender == "0.68") {
+                        if (gender.equals("0.68")) {
                             currentGender.setText("Gender: male");
                         } else {
                             currentGender.setText("Gender: female");
