@@ -91,6 +91,11 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        show_history.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
+            startActivity(intent);
+        });
+
         editProfile.setOnClickListener(view -> {
             Intent intent = new Intent(ProfileActivity.this, DataInput.class);
             startActivity(intent);
