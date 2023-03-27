@@ -144,7 +144,7 @@ public class AlcoholCalculator extends AppCompatActivity {
                     double vr = alcStrength * (volume * 5.4);
                     double mr = weight * gender;
                     double prom = vr / mr;
-                    sober = prom * 0.015;
+                    sober = prom / 0.16;
 
                     String ssober = String.valueOf(sober);
                     String sprom = String.valueOf(prom);
