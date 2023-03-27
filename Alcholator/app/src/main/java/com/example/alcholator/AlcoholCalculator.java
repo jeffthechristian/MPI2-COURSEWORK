@@ -141,10 +141,10 @@ public class AlcoholCalculator extends AppCompatActivity {
                     if (alcStrength<=0||volume<=0){
                         throw new Exception();
                     }
-                    double vr = alcStrength * (volume * 7.9);
+                    double vr = alcStrength * (volume * 5.4);
                     double mr = weight * gender;
                     double prom = vr / mr;
-                    sober = prom / 0.16;
+                    sober = prom * 0.015;
 
                     String ssober = String.valueOf(sober);
                     String sprom = String.valueOf(prom);
